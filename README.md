@@ -1,137 +1,133 @@
-# 📊 Netflix Content Analysis Project
+# Netflix Content Analysis Project
 
-Este repositorio contiene un análisis completo de la biblioteca de contenido de Netflix, explorando patrones en películas y series, preferencias regionales y la evolución del catálogo a lo largo del tiempo.
+## Overview
+This project performs comprehensive data analysis on Netflix's content library using the "Netflix Shows" dataset from Kaggle. It explores content distribution, regional production patterns, release trends, and genre popularity through data visualization and statistical analysis.
 
----
+## Features
+- **Content Distribution Analysis**: Examines the balance between Movies and TV Shows
+- **Temporal Analysis**: Tracks content addition patterns over time
+- **Geographic Analysis**: Identifies top content-producing countries
+- **Genre Analysis**: Explores popular content categories and regional preferences
+- **Rating Distribution**: Analyzes content rating patterns across different types
+- **Release-to-Availability Gap**: Measures the time between content release and Netflix availability
+- **A/B Testing**: Compares metrics between pre-2015 and post-2015 content
 
-## 🧠 Objetivo del Proyecto
+## Prerequisites
+- Python 3.x
+- pip package manager
 
-Este proyecto busca extraer insights del catálogo global de Netflix, respondiendo preguntas como:
-
-- ¿Netflix tiene más películas o series?
-- ¿Qué países producen más contenido para Netflix?
-- ¿Cómo ha cambiado la oferta de contenido a lo largo de los años?
-- ¿Qué géneros son más populares?
-- ¿Qué diferencias existen entre películas y series según región?
-
----
-
-## ⚙️ Instalación y Configuración
+## Installation
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/your-username/netflix-analysis.git
-cd netflix-analysis
+# Install the kagglehub library
+pip install kagglehub
 
-# Instalar dependencias
-pip install -r requirements.txt
-
-netflix-analysis/
-├── README.md
-├── netflix_analysis.py            # Script principal (automatización)
-├── requirements.txt               # Dependencias
-├── data/
-│   └── netflix_titles.csv         # Dataset
-├── notebooks/
-│   └── exploratory_analysis.ipynb # Análisis exploratorio
-├── visualizations/                # Imágenes generadas
-└── database/
-    └── netflix.db                 # Base de datos SQLite 
+# Install additional dependencies
+pip install pandas matplotlib seaborn scipy numpy sqlite3
 ```
-# 📊 Análisis Exploratorio (EDA)
 
-## 🔹 Tipo de contenido
-- **70%** del contenido corresponde a **películas**.
-- Las **series** están aumentando en proporción en años recientes.
+## Data Source
+The project uses the "Netflix Shows" dataset from Kaggle, which contains information about movies and TV shows available on Netflix. The dataset is loaded using the kagglehub library.
 
-## 🔹 Evolución temporal
-- **Pico de adiciones** de contenido entre **2018 y 2020**.
-- Se estabiliza en años posteriores.
+```python
+import kagglehub
+from kagglehub import KaggleDatasetAdapter
 
-## 🔹 Producción por país
-- **Estados Unidos** lidera por lejos, seguido de **India**, **Reino Unido** y **Canadá**.
-- Producción regional creciente en países como **Corea del Sur** y **Brasil**.
+df = kagglehub.load_dataset(
+    KaggleDatasetAdapter.PANDAS,
+    "shivamb/netflix-shows",
+    "netflix_titles.csv",
+)
+```
 
-## 🔹 Géneros populares
-- **Películas**: Dramas, Documentales, Comedias.
-- **Series**: Docuseries, Reality Shows, Crime TV.
+## Key Analyses
 
-## 🔹 Ratings más comunes
-- **TV-MA**, **TV-14** y **PG-13** dominan.
-- El **contenido adulto** supera al contenido familiar.
+### 1. Basic Dataset Exploration
+- Dataset dimensions and structure
+- Column data types
+- Missing value identification
+- Summary statistics
 
----
+### 2. Content Type Distribution
+- Movies vs. TV Shows proportion analysis
+- Visualization using countplots
 
-## 📐 A/B Testing Simulado
+### 3. Temporal Analysis
+- Content addition trends by year
+- Release year distribution
+- Release-to-availability lag analysis
 
-Se generaron dos grupos con niveles de engagement diferentes:
+### 4. Geographic Analysis
+- Top content-producing countries
+- Country-specific visualizations
+- SQL integration for geographic queries
 
-- **Grupo A**: contenido promocionado con *trailers*.
-- **Grupo B**: contenido con solo *sinopsis*.
+### 5. Genre Analysis
+- Top genres identification
+- Genre distribution visualizations
+- Country-specific genre preferences (e.g., United States)
 
-**Resultados del T-test**:
-- `p-value < 0.05` → diferencia **estadísticamente significativa**.
+### 6. Content Metrics
+- Movie duration analysis
+- TV show season count analysis
+- Rating distribution by content type
 
-**Conclusión**: las campañas con *trailers* generan **mayor engagement**.
+### 7. Statistical Testing
+- A/B testing between pre-2015 and post-2015 content
+- Rating and engagement metrics comparison
+- Statistical significance testing
 
----
+## Visualizations
+The project includes various data visualizations:
+- Bar charts for categorical comparisons
+- Histograms for distribution analysis
+- Line charts for temporal trends
+- Box plots for statistical comparisons
 
-## 🗺️ Ejemplos de Visualizaciones
+## Database Integration
+The project demonstrates SQLite database integration for persistent data storage and SQL querying capabilities.
 
-📌 Distribución de contenido por tipo  
-📌 Series temporales del contenido agregado  
-📌 Gráfico de barras de países con más producciones  
-📌 KDE plot de A/B testing  
-📌 Gráficos de géneros por país  
+```python
+import sqlite3
 
-📁 Todas las visualizaciones se encuentran en la carpeta `visualizations/`.
+conn = sqlite3.connect('netflix.db')
+df.to_sql('netflix', conn, if_exists='replace', index=False)
 
----
+# Example SQL query
+query = """
+SELECT country, COUNT(*) as total
+FROM netflix
+WHERE country IS NOT NULL
+GROUP BY country
+ORDER BY total DESC
+LIMIT 5;
+"""
 
-## 🗃️ Base de Datos (opcional)
+pd.read_sql_query(query, conn)
+```
 
-Se construyó una base de datos **SQLite** con la tabla limpia `netflix_titles`.
+## A/B Testing Framework
+The project implements an A/B testing framework to compare content performance metrics:
+- Group A: Content released before 2015
+- Group B: Content released in 2015 or later
+- Metrics analyzed: User ratings and seasons watched
+- Statistical significance testing using t-tests
 
-Consultas SQL permiten responder preguntas como:
-- ¿Qué géneros crecieron más rápido?
-- ¿Qué año tuvo más contenido nuevo por país?
+## Results Highlights
+- Content distribution shows a higher proportion of movies compared to TV shows
+- United States is the leading content producer, followed by other major countries
+- Genre preferences vary significantly by region
+- Statistical comparison between older and newer content reveals significant differences in user engagement metrics
 
----
+## Next Steps
+- Implement sentiment analysis on content descriptions
+- Explore recommendation algorithm based on content patterns
+- Investigate correlation between content attributes and popularity
+- Analyze seasonal patterns in content additions
 
-## 🧰 Tecnologías Utilizadas
+## License
+This project uses data from Kaggle that is subject to Kaggle's terms of use.
 
-- Python  
-- Pandas & NumPy  
-- Matplotlib & Seaborn  
-- SQLite3  
-- SciPy (T-test)  
-- Jupyter Notebook  
-
----
-
-## 🔍 Posibles Extensiones
-
-🤖 Entrenar un modelo de clasificación de géneros  
-📈 Predecir el éxito de un contenido con *machine learning*  
-🧩 Integrar datos de IMDb o Rotten Tomatoes  
-🌐 Crear un dashboard con Streamlit o Power BI  
-
----
-
-## 📬 Contacto
-
-**Juan Camilo Cortés Sánchez**  
-[LinkedIn](#)  
-📧 tu.email@ejemplo.com  
-🔗 Proyecto: [https://github.com/your-username/netflix-analysis](https://github.com/your-username/netflix-analysis)
-
----
-
-## 📝 Licencia
-
-Este proyecto está licenciado bajo la licencia **MIT**.  
-Consulta el archivo `LICENSE` para más detalles.
-
-
-
-
+## Acknowledgments
+- Kaggle and the dataset provider (shivamb)
+- Netflix for the content data
