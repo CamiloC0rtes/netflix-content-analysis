@@ -38,93 +38,99 @@ netflix-analysis/
 └── database/
     └── netflix.db                 # Base de datos SQLite 
 ```
-📊 Análisis Exploratorio (EDA)
-🔹 Tipo de contenido
-70% del contenido corresponde a películas.
+# 📊 Análisis Exploratorio (EDA)
 
-Las series están aumentando en proporción en años recientes.
+## 🔹 Tipo de contenido
+- **70%** del contenido corresponde a **películas**.
+- Las **series** están aumentando en proporción en años recientes.
 
-🔹 Evolución temporal
-Pico de adiciones de contenido entre 2018 y 2020.
+## 🔹 Evolución temporal
+- **Pico de adiciones** de contenido entre **2018 y 2020**.
+- Se estabiliza en años posteriores.
 
-Se estabiliza en años posteriores.
+## 🔹 Producción por país
+- **Estados Unidos** lidera por lejos, seguido de **India**, **Reino Unido** y **Canadá**.
+- Producción regional creciente en países como **Corea del Sur** y **Brasil**.
 
-🔹 Producción por país
-Estados Unidos lidera por lejos, seguido de India, Reino Unido y Canadá.
+## 🔹 Géneros populares
+- **Películas**: Dramas, Documentales, Comedias.
+- **Series**: Docuseries, Reality Shows, Crime TV.
 
-Producción regional creciente en países como Corea del Sur y Brasil.
+## 🔹 Ratings más comunes
+- **TV-MA**, **TV-14** y **PG-13** dominan.
+- El **contenido adulto** supera al contenido familiar.
 
-🔹 Géneros populares
-Películas: Dramas, Documentales, Comedias.
+---
 
-Series: Docuseries, Reality Shows, Crime TV.
+## 📐 A/B Testing Simulado
 
-🔹 Ratings más comunes
-TV-MA, TV-14 y PG-13 dominan.
-
-Contenido adulto supera al familiar.
-
-📐 A/B Testing Simulado
 Se generaron dos grupos con niveles de engagement diferentes:
 
-Grupo A: contenido promocionado con trailers.
+- **Grupo A**: contenido promocionado con *trailers*.
+- **Grupo B**: contenido con solo *sinopsis*.
 
-Grupo B: contenido con solo sinopsis.
+**Resultados del T-test**:
+- `p-value < 0.05` → diferencia **estadísticamente significativa**.
 
-Resultados del T-test:
+**Conclusión**: las campañas con *trailers* generan **mayor engagement**.
 
-p-value < 0.05 → diferencia estadísticamente significativa.
+---
 
-Conclusión: las campañas con trailers generan mayor engagement.
+## 🗺️ Ejemplos de Visualizaciones
 
-🗺️ Ejemplos de Visualizaciones
-📌 Distribución de contenido por tipo
-📌 Series temporales del contenido agregado
-📌 Gráfico de barras de países con más producciones
-📌 KDE plot de A/B testing
-📌 Gráficos de géneros por país
+📌 Distribución de contenido por tipo  
+📌 Series temporales del contenido agregado  
+📌 Gráfico de barras de países con más producciones  
+📌 KDE plot de A/B testing  
+📌 Gráficos de géneros por país  
 
-Todas las visualizaciones se encuentran en la carpeta visualizations/.
+📁 Todas las visualizaciones se encuentran en la carpeta `visualizations/`.
 
-🗃️ Base de Datos (opcional)
-Se construyó una base de datos SQLite con la tabla limpia netflix_titles.
+---
+
+## 🗃️ Base de Datos (opcional)
+
+Se construyó una base de datos **SQLite** con la tabla limpia `netflix_titles`.
 
 Consultas SQL permiten responder preguntas como:
+- ¿Qué géneros crecieron más rápido?
+- ¿Qué año tuvo más contenido nuevo por país?
 
-¿Qué géneros crecieron más rápido?
+---
 
-¿Qué año tuvo más contenido nuevo por país?
+## 🧰 Tecnologías Utilizadas
 
-🧰 Tecnologías Utilizadas
-Python
+- Python  
+- Pandas & NumPy  
+- Matplotlib & Seaborn  
+- SQLite3  
+- SciPy (T-test)  
+- Jupyter Notebook  
 
-Pandas & NumPy
+---
 
-Matplotlib & Seaborn
+## 🔍 Posibles Extensiones
 
-SQLite3
+🤖 Entrenar un modelo de clasificación de géneros  
+📈 Predecir el éxito de un contenido con *machine learning*  
+🧩 Integrar datos de IMDb o Rotten Tomatoes  
+🌐 Crear un dashboard con Streamlit o Power BI  
 
-SciPy (T-test)
+---
 
-Jupyter Notebook
+## 📬 Contacto
 
-🔍 Posibles Extensiones
-🤖 Entrenar un modelo de clasificación de géneros
+**Juan Camilo Cortés Sánchez**  
+[LinkedIn](#)  
+📧 tu.email@ejemplo.com  
+🔗 Proyecto: [https://github.com/your-username/netflix-analysis](https://github.com/your-username/netflix-analysis)
 
-📈 Predecir el éxito de un contenido con machine learning
+---
 
-🧩 Integrar datos de IMDb o Rotten Tomatoes
+## 📝 Licencia
 
-🌐 Crear un dashboard con Streamlit o Power BI
-
-📬 Contacto
-Juan Camilo Cortés Sánchez
-LinkedIn
-📧 tu.email@ejemplo.com
-🔗 Proyecto: https://github.com/your-username/netflix-analysis
-
-📝 Licencia
-Este proyecto está licenciado bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
+Este proyecto está licenciado bajo la licencia **MIT**.  
+Consulta el archivo `LICENSE` para más detalles.
 
 
 
